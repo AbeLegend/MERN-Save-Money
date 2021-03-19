@@ -18,7 +18,6 @@ function App() {
         <Route exact path="/" component={Index} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-
         <PrivateRoute path="/home" component={Home} />
       </Switch>
     </Router>

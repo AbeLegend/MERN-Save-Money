@@ -53,3 +53,23 @@ export const readMoney = async (req, res) => {
     return res.status(500).send('Error. Try again.');
   }
 }
+
+export const totalMoney = async (req, res) => {
+  try {
+    const { _id } = req.user;
+    const myMoney = await Money.find({ userId: _id });
+    let total = 0;
+    for (const key in myMoney) {
+      const money = myMoney[key].money;
+      const status = myMoney[key].status;
+      if (status === "plus") {
+        total += money;
+      } else {
+        total -= money;
+      }
+    }
+    return res.status(200).json(total);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+}
